@@ -1,0 +1,1 @@
+CSRF süresi dolduğunda başka sayfaya yönlendirme
