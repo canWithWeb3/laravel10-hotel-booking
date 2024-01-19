@@ -27,6 +27,10 @@
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+	{{-- boostrap datatable css --}}
+	<link href="{{ asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+
+
 	<title>Admin Dashboard</title>
 </head>
 
@@ -88,6 +92,10 @@
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="{{ asset('backend/assets/js/code.js') }}"></script>
+	<script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
+
 	<script>
 		@if(Session::has('message'))
 			var type = "{{ Session::get('alert-type','info') }}"
@@ -107,6 +115,14 @@
 			}
 		@endif 
 	   </script>
+
+		<script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+		<script src="{{ asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+		<script>
+			$(document).ready(function() {
+				$('#example').DataTable();
+			} );
+		</script>
 </body>
 
 </html>
