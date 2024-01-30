@@ -30,13 +30,18 @@
                     </thead>
                     <tbody>
                         @foreach ($allData as  $key => $item)
+                            @php
+                                $rooms = App\Models\Room::where('roomtype_id', $item->id)->get();
+                            @endphp
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td></td>
+                                <td><img style="width: 50px; height: 30px;" src="{{ (!empty($item->room->image)) ? url('upload/rooming/'.$item->room->image) : url('upload/no_image.jpg') }}" alt=""></td>
                                 <td>{{ $item->name }}</td>
                                 <td>
-                                    <a href="{{ route('edit.team', $item->id) }}" class="btn btn-warning px-3 radius-30">Edit</a>
-                                    <a href="{{ route('delete.team', $item->id) }}" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                    @foreach ($rooms as $roo)
+                                    <a href="{{ route('edit.room', $roo->id) }}" class="btn btn-warning px-3 radius-30">Edit</a>
+                                    <a href="" class="btn btn-danger px-3 radius-30" id="delete">Delete</a>
+                                    @endforeach
                                 </td>
                             </tr>
                         @endforeach
