@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('rooms_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->string('check_in')->nullable();
-            $table->string('checkout')->nullable();
+            $table->string('check_out')->nullable();
             $table->string('persion')->nullable();
             $table->string('number_of_rooms')->nullable();
 
