@@ -97,11 +97,27 @@ Route::controller(FrontendRoomController::class)->group(function(){
 
 // Auth Middleware User must have Login for access this route
 Route::middleware(['auth'])->group(function(){
+    // Admin Booking ALL Route
+    Route::controller(BookingController::class)->group(function(){
+        Route::get('/booking/list', 'BookingList')->name('booking.list');
+        Route::get('/edit_booking/{id}', 'EditBooking')->name('edit_booking');
+    });
+
     // Checkout All Route
     Route::controller(BookingController::class)->group(function(){
         Route::get('/checkout/', 'Checkout')->name('checkout');
         Route::post('/booking/store/', 'BookingStore')->name('user_booking_store');
         Route::post('/checkout/store/', 'CheckoutStore')->name('checkout.store');
-    
+        
+        // booking Update
+        Route::post('/update/booking/status/{id}', "UpdateBookingStatus")->name('update.booking.status');
+        Route::post('/update/booking/{id}', "UpdateBooking")->name('update.booking');
+        
+        // Assign Room Route 
+        Route::get('/assign_room/{id}', 'AssignRoom')->name('assign_room');
+        Route::get('/assign_room/store/{booking_id}/{room_number_id}', 'AssignRoomStore')->name('assign_room_store');
+        Route::get('/assign_room_delete/{id}', 'AssignRoomDelete')->name('assign_room_delete');
     });
+
+
 }); // End Group Auth Middleware
