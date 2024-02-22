@@ -278,6 +278,24 @@ class BookingController extends Controller
             ]);
 
         return $pdf->download('invoice.pdf');
-     }
+    } // End Methot
+
+     public function UserBooking(){
+        $id = Auth::user()->id;
+        $allData = Booking::where('user_id', $id)->orderBy('id', 'DESC')->get();
+        return view('frontend.dashboard.user_booking', compact('allData'));
+
+     } // End Methot
+
+     public function UserInvoice($id){
+        $editData = Booking::with('room')->find($id);
+        $pdf = Pdf::loadView('backend.booking.booking_invoice', compact('editData'))
+            ->setPaper('a4')->setOption([
+                'tempDir' => public_path(),
+                'chroot' => public_path()
+            ]);
+
+        return $pdf->download('invoice.pdf');
+    } // End Methot
 
 }
