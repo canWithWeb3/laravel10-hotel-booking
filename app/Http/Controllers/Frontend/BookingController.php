@@ -14,6 +14,8 @@ use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BookConfirm;
 
 class BookingController extends Controller
 {
@@ -160,6 +162,20 @@ class BookingController extends Controller
         $booking->payment_status = $request->payment_status;
         $booking->status = $request->status;
         $booking->save();
+
+        // Start Send Email
+        $sendmail = Booking::find($id);
+
+        $data = [
+            "check_in" => $sendmail->check_in,
+            "check_out" => $sendmail->check_out,
+            "name" => $sendmail->name,
+            "email" => $sendmail->email,
+            "phone" => $sendmail->phone,
+        ];
+
+        Mail::to($sendmail->email)->send(new BookConfirm($data));
+        // End Send Email
 
         $notification = array(
             'message' => "Information Updated Successfully",
