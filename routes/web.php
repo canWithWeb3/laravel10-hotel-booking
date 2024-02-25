@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\RoomListController;
 use App\Http\Controllers\Backend\RoomTypeController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Frontend\BookingController;
 use App\Http\Controllers\Frontend\FrontendRoomController;
@@ -95,6 +96,12 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
         Route::get('/view/room/list', 'ViewRoomList')->name('view.room.list');
         Route::get('/add/room/list', 'AddRoomList')->name('add.room.list');
         Route::post('/store/room/list', 'StoreRoomList')->name('store.roomlist');
+    });
+
+    // Admin Booking ALL Route
+    Route::controller(SettingController::class)->group(function(){
+        Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
+        Route::post('/smtp/update', 'SmtpUpdate')->name('smtp.update');
     });
 
 }); // End Admin Group Middleware
